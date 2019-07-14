@@ -17,7 +17,7 @@ func RegisterHandles() *httprouter.Router {
 }
 
 // handler -> validation{1.request 2.user}->business logic->reponse
-
+// main->middleware->defs(message, err)->handlers->dbops->response
 func main() {
 	router := RegisterHandles()
 
