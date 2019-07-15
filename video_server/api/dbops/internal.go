@@ -42,10 +42,10 @@ func RetrieveSession(sid string) (*defs.SimpleSession, error) {
 		return nil, err
 	}
 	defer stmtOut.Close()
-	return res, nil
+	return ss, nil
 }
 
-func RetrieveAllSessions() (*defs.SimpleSession, error) {
+func RetrieveAllSessions() (*sync.Map, error) {
 	m := &sync.Map{}
 	stmtOut, err := dbConn.Prepare("SELECT * FROM sessions")
 	if err != nil {
