@@ -69,3 +69,12 @@ CREATE TABLE sessions(
   TTL TINYTEXT,
   login_name VARCHAR(64)
 );
+
+--
+-- 表的结构 `video_del_rec`
+--
+
+
+CREATE TABLE video_del_rec( 
+  video_id VARCHAR(64) PRIMARY KEY NOT NULL
+);
