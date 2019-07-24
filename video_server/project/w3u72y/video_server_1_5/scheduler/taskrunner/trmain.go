@@ -2,6 +2,7 @@ package taskrunner
 
 import (
 	"time"
+	//"log"
 )
 
 type Worker struct {
@@ -10,24 +11,26 @@ type Worker struct {
 }
 
 func NewWorker(interval time.Duration, r *Runner) *Worker {
-	return &Worker{
+	return &Worker {
 		ticker: time.NewTicker(interval * time.Second),
 		runner: r,
 	}
 }
 
-func (w *Worker) StartWorker() {
+func (w *Worker) startWorker() {
 	for {
 		select {
-		case <-w.ticker.C:
+		case <- w.ticker.C:
 			go w.runner.StartAll()
 		}
 	}
 }
 
 func Start() {
-	//Start video file cleaning
+	// Start video file cleaning
 	r := NewRunner(3, true, VideoClearDispatcher, VideoClearExecutor)
 	w := NewWorker(3, r)
-	go w.StartWorker()
+	go w.startWorker()
 }
+
+

@@ -1,25 +1,21 @@
-package main
+package main 
 
 import (
 	"net/http"
-
-	"video_server/scheduler/taskrunner"
-
 	"github.com/julienschmidt/httprouter"
+	"github.com/avenssi/video_server/scheduler/taskrunner"
 )
 
 func RegisterHandlers() *httprouter.Router {
 	router := httprouter.New()
 
-	router.GET("/video-delete-record/:vid-id", vidDleRecHandler)
+	router.GET("/video-delete-record/:vid-id", vidDelRecHandler)
 
 	return router
 }
 
 func main() {
 	go taskrunner.Start()
-
-	router := RegisterHandlers()
-
-	http.ListenAndServe(":9001", router)
+	r := RegisterHandlers()
+	http.ListenAndServe(":9001", r)
 }

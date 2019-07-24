@@ -1,20 +1,19 @@
-package main
+package main 
 
 import (
 	"net/http"
-
 	"github.com/julienschmidt/httprouter"
-
-	"video_server/scheduler/dbops"
+	"github.com/avenssi/video_server/scheduler/dbops"
 )
 
-func vidDleRecHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func vidDelRecHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params){
 	vid := p.ByName("vid-id")
 
 	if len(vid) == 0 {
 		sendResponse(w, 400, "video id should not be empty")
-		return
+		return 
 	}
+
 	err := dbops.AddVideoDeletionRecord(vid)
 	if err != nil {
 		sendResponse(w, 500, "Internal server error")
